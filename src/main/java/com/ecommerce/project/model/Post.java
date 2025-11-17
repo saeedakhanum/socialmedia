@@ -1,20 +1,37 @@
 package com.ecommerce.project.model;
 
+import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Post {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	 
 	@ManyToOne
 	@JoinColumn(name="social_user_id")
+	@JsonIgnore
 	private SocialUser socialUser;
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	
 }
